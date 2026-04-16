@@ -29,7 +29,7 @@ const ThemePicker = ({ activeTheme, onThemeChange }: ThemePickerProps) => {
                 boxShadow: isActive
                   ? `0 0 15px hsl(${themeMap[theme].hsl} / 0.6), 0 0 30px hsl(${themeMap[theme].hsl} / 0.3)`
                   : "none",
-                ringColor: isActive ? `hsl(${themeMap[theme].hsl})` : undefined,
+                ...(isActive ? { "--tw-ring-color": `hsl(${themeMap[theme].hsl})` } as React.CSSProperties : {}),
               }}
               title={themeMap[theme].label}
             >
