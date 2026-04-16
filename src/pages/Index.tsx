@@ -92,7 +92,7 @@ const Index = () => {
 
           {/* CTA */}
           <Button variant="neon" size="lg" className="mb-3" asChild>
-            <a href="https://cash.app/$fishkillerzstaking" target="_blank" rel="noopener noreferrer">
+            <a href="https://venmo.com/neontime" target="_blank" rel="noopener noreferrer">
               SUBSCRIBE — $9.99/mo
             </a>
           </Button>
@@ -167,22 +167,32 @@ const Index = () => {
             ))}
           </ul>
           <Button variant="neon" className="w-full" asChild>
-            <a href="https://cash.app/$fishkillerzstaking" target="_blank" rel="noopener noreferrer">GET NEONTIME</a>
+            <a href="https://venmo.com/neontime" target="_blank" rel="noopener noreferrer">GET NEONTIME</a>
           </Button>
 
-          {/* Payment info */}
-          <div className="mt-5 pt-4 border-t border-border space-y-2">
+          {/* QR Code */}
+          <div className="mt-5 pt-4 border-t border-border space-y-3">
             <p className="text-[11px] font-display font-bold tracking-wider text-neon-green text-glow-green">
+              SCAN TO PAY
+            </p>
+            <div className="flex justify-center">
+              <img
+                src="/venmo-qr.jpg"
+                alt="Venmo QR code — pay @neontime $9.99"
+                className="w-48 h-48 object-contain rounded-lg"
+              />
+            </div>
+            <p className="text-[11px] font-display font-bold tracking-wider text-neon-green text-glow-green mt-3">
               HOW IT WORKS
             </p>
             <ol className="space-y-1.5 text-xs font-body text-muted-foreground text-left list-decimal list-inside">
-              <li>Tap <span className="text-foreground font-semibold">"Get NeonTime"</span> to pay <span className="text-foreground font-semibold">$9.99</span> via Cash App</li>
-              <li>Send to <span className={`font-semibold ${t.primaryText}`}>$fishkillerzstaking</span></li>
+              <li>Scan the QR code or tap <span className="text-foreground font-semibold">"Get NeonTime"</span> to pay <span className="text-foreground font-semibold">$9.99</span> via Venmo</li>
+              <li>Send to <span className={`font-semibold ${t.primaryText}`}>@neontime</span></li>
               <li>Include your <span className="text-foreground font-semibold">email</span> in the payment note</li>
               <li>Receive your watch face download link within <span className="text-foreground font-semibold">24 hours</span></li>
             </ol>
             <p className="text-[10px] text-muted-foreground font-body pt-1">
-              Questions? Message us on Cash App. Subscription renews monthly — cancel anytime by messaging us.
+              Questions? Message us on Venmo. Subscription renews monthly — cancel anytime by messaging us.
             </p>
           </div>
         </div>
@@ -220,7 +230,7 @@ const Index = () => {
             },
             {
               q: "How does the $9.99/mo subscription work?",
-              a: "Payment is via Cash App to $fishkillerzstaking. Include your email in the payment note. Your subscription renews monthly — to cancel, simply message us on Cash App anytime.",
+              a: "Payment is via Venmo to @neontime. Scan the QR code or tap the button. Include your email in the payment note. Your subscription renews monthly — to cancel, simply message us on Venmo anytime.",
             },
             {
               q: "What lunar and solar data is shown?",
