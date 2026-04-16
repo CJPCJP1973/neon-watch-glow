@@ -6,6 +6,7 @@ import WatchFace from "@/components/WatchFace";
 import WatchFaceSquare from "@/components/WatchFaceSquare";
 import WatchFaceRect from "@/components/WatchFaceRect";
 import WatchFaceMinimal from "@/components/WatchFaceMinimal";
+import WatchFaceAnalog from "@/components/WatchFaceAnalog";
 import FeatureCard from "@/components/FeatureCard";
 import ThemePicker from "@/components/ThemePicker";
 import ShapePicker, { type WatchShape } from "@/components/ShapePicker";
@@ -32,12 +33,14 @@ const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonThem
       return <WatchFaceRect theme={theme} />;
     case "minimal":
       return <WatchFaceMinimal theme={theme} />;
+    case "analog":
+      return <WatchFaceAnalog theme={theme} />;
     default:
       return <WatchFace theme={theme} />;
   }
 };
 
-const shapes: WatchShape[] = ["round", "square", "rect", "minimal"];
+const shapes: WatchShape[] = ["round", "square", "rect", "minimal", "analog"];
 
 const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
@@ -170,18 +173,19 @@ const Index = () => {
       {/* Gallery */}
       <section className="relative px-4 py-20 max-w-5xl mx-auto">
         <h2 className="font-display text-2xl md:text-3xl font-black text-center text-foreground mb-3">
-          4 STYLES. <span className={`${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>ONE SUB.</span>
+          5 STYLES. <span className={`${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>ONE SUB.</span>
         </h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-md mx-auto">
           Pick the watch face that matches your vibe. Switch anytime.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 justify-items-center">
           {([
             { shape: "round" as const, label: "CLASSIC" },
             { shape: "square" as const, label: "SQUARE" },
             { shape: "rect" as const, label: "BAND" },
             { shape: "minimal" as const, label: "MINIMAL" },
+            { shape: "analog" as const, label: "ANALOG" },
           ]).map(({ shape, label }) => (
             <div key={shape} className="flex flex-col items-center gap-3">
               <div className="transform scale-[0.55] origin-center">
