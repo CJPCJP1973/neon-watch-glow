@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -20,6 +20,8 @@ const features = [
   { icon: Timer, title: "CHRONOGRAPH", description: "Precision stopwatch with lap times. Track your runs, swims & workouts to the millisecond.", color: "green" as const },
   { icon: Footprints, title: "STEP COUNTER", description: "Track daily steps, distance walked & calories burned. Hit your goals right from your wrist.", color: "orange" as const },
   { icon: Heart, title: "HEART RATE", description: "Continuous heart rate monitoring with resting BPM, zones & alerts for abnormal readings.", color: "magenta" as const },
+  { icon: BedDouble, title: "SLEEP TRACKING", description: "Monitor sleep stages, duration & quality. Wake up smarter with personalized sleep scores.", color: "cyan" as const },
+  { icon: Activity, title: "BLOOD OXYGEN (SpO2)", description: "Real-time SpO2 monitoring with altitude adjustments & low-oxygen alerts for your safety.", color: "green" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
@@ -128,7 +130,7 @@ const Index = () => {
           EVERYTHING ON YOUR <span className="text-neon-magenta text-glow-magenta">WRIST</span>
         </h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-md mx-auto">
-          Ten data modules. One glance. Zero distractions.
+          Twelve data modules. One glance. Zero distractions.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
