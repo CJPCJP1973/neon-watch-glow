@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
 import FeatureCard from "@/components/FeatureCard";
+import ThemePicker from "@/components/ThemePicker";
+import { NeonTheme, themeMap } from "@/lib/themes";
 
 const features = [
   { icon: Cloud, title: "WEATHER ALERTS", description: "Real-time storm warnings, temperature, humidity & wind data at a glance.", color: "cyan" as const },
@@ -11,23 +14,32 @@ const features = [
 ];
 
 const Index = () => {
+  const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
+  const t = themeMap[activeTheme];
+
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       {/* Hero */}
       <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-20">
         {/* Background grid */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: "linear-gradient(hsl(170 100% 50%) 1px, transparent 1px), linear-gradient(90deg, hsl(170 100% 50%) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }} />
+        <div
+          className="absolute inset-0 opacity-[0.03] transition-all duration-500"
+          style={{
+            backgroundImage: `linear-gradient(hsl(${t.hsl}) 1px, transparent 1px), linear-gradient(90deg, hsl(${t.hsl}) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
 
         {/* Radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-neon-cyan/5 blur-[120px]" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] transition-all duration-700"
+          style={{ backgroundColor: `hsl(${t.hsl} / 0.06)` }}
+        />
 
         <div className="relative z-10 flex flex-col items-center text-center">
           <div className="flex items-center gap-2 mb-6">
-            <Zap className="w-5 h-5 text-neon-cyan" />
-            <span className="font-display text-xs font-bold tracking-[0.3em] text-neon-cyan text-glow-cyan">
+            <Zap className={`w-5 h-5 ${t.primaryText} transition-colors duration-500`} />
+            <span className={`font-display text-xs font-bold tracking-[0.3em] ${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>
               NEONTIME
             </span>
           </div>
@@ -35,7 +47,7 @@ const Index = () => {
           <h1 className="font-display text-4xl md:text-6xl font-black text-foreground mb-4 leading-tight">
             YOUR WRIST.
             <br />
-            <span className="text-primary text-glow-cyan">SUPERCHARGED.</span>
+            <span className={`${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>SUPERCHARGED.</span>
           </h1>
 
           <p className="text-muted-foreground font-body text-lg md:text-xl max-w-md mb-8">
@@ -43,8 +55,13 @@ const Index = () => {
           </p>
 
           {/* Watch Face */}
-          <div className="mb-10">
-            <WatchFace />
+          <div className="mb-6">
+            <WatchFace theme={activeTheme} />
+          </div>
+
+          {/* Theme Picker */}
+          <div className="mb-8">
+            <ThemePicker activeTheme={activeTheme} onThemeChange={setActiveTheme} />
           </div>
 
           {/* CTA */}
@@ -80,13 +97,13 @@ const Index = () => {
             PREMIUM
           </span>
           <div className="flex items-baseline justify-center gap-1 my-4">
-            <span className="text-5xl font-display font-black text-primary text-glow-cyan">$9.99</span>
+            <span className={`text-5xl font-display font-black ${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>$9.99</span>
             <span className="text-muted-foreground font-body text-sm">/mo</span>
           </div>
           <ul className="space-y-2 mb-6 text-sm font-body text-muted-foreground">
             {["All watch face modules", "Real-time weather & traffic", "Lunar & solar tracking", "Unlimited customization", "Priority support"].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <AlertTriangle className="w-3 h-3 text-neon-cyan" />
+                <AlertTriangle className={`w-3 h-3 ${t.primaryText} transition-colors duration-500`} />
                 {item}
               </li>
             ))}
