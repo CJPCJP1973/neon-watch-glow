@@ -159,7 +159,7 @@ const Index = () => {
             <span className="text-muted-foreground font-body text-sm">/mo</span>
           </div>
           <ul className="space-y-2 mb-6 text-sm font-body text-muted-foreground">
-            {["All 4 watch face styles", "Real-time weather & traffic", "Lunar & solar tracking", "6 neon color themes", "Priority support"].map((item) => (
+            {["All 4 watch face styles", "Real-time weather & traffic", "Lunar & solar tracking", "Compass & chronograph", "6 neon color themes", "Priority support"].map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <AlertTriangle className={`w-3 h-3 ${t.primaryText} transition-colors duration-500`} />
                 {item}
