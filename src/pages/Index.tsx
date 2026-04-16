@@ -115,6 +115,36 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Gallery */}
+      <section className="relative px-4 py-20 max-w-5xl mx-auto">
+        <h2 className="font-display text-2xl md:text-3xl font-black text-center text-foreground mb-3">
+          4 STYLES. <span className={`${t.primaryText} ${t.primaryGlow} transition-colors duration-500`}>ONE SUB.</span>
+        </h2>
+        <p className="text-center text-muted-foreground font-body mb-12 max-w-md mx-auto">
+          Pick the watch face that matches your vibe. Switch anytime.
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+          {([
+            { shape: "round" as const, label: "CLASSIC" },
+            { shape: "square" as const, label: "SQUARE" },
+            { shape: "rect" as const, label: "BAND" },
+            { shape: "minimal" as const, label: "MINIMAL" },
+          ]).map(({ shape, label }) => (
+            <div key={shape} className="flex flex-col items-center gap-3">
+              <div className="transform scale-[0.55] origin-center">
+                <WatchFaceVariant shape={shape} theme={activeTheme} />
+              </div>
+              <span className={`font-display text-xs font-bold tracking-[0.15em] ${
+                activeShape === shape ? `${t.primaryText} ${t.primaryGlow}` : "text-muted-foreground"
+              } transition-colors duration-300`}>
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="relative px-4 py-20 flex flex-col items-center">
         <div className="relative p-8 rounded-2xl neon-border bg-card max-w-sm w-full text-center">
