@@ -1,7 +1,7 @@
-import { Circle, Square, RectangleVertical, Minus } from "lucide-react";
+import { Circle, Square, RectangleVertical, Minus, Clock } from "lucide-react";
 import { NeonTheme, themeMap } from "@/lib/themes";
 
-export type WatchShape = "round" | "square" | "rect" | "minimal";
+export type WatchShape = "round" | "square" | "rect" | "minimal" | "analog";
 
 interface ShapePickerProps {
   activeShape: WatchShape;
@@ -14,6 +14,7 @@ const shapes: { id: WatchShape; icon: typeof Circle; label: string }[] = [
   { id: "square", icon: Square, label: "SQUARE" },
   { id: "rect", icon: RectangleVertical, label: "BAND" },
   { id: "minimal", icon: Minus, label: "MINIMAL" },
+  { id: "analog", icon: Clock, label: "ANALOG" },
 ];
 
 const ShapePicker = ({ activeShape, onShapeChange, theme }: ShapePickerProps) => {
