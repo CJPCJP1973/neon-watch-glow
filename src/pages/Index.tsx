@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
 import WatchFaceSquare from "@/components/WatchFaceSquare";
@@ -183,6 +184,65 @@ const Index = () => {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="relative px-4 py-20 max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <HelpCircle className={`w-5 h-5 ${t.primaryText} transition-colors duration-500`} />
+          <h2 className="font-display text-2xl md:text-3xl font-black text-center text-foreground">
+            FAQ
+          </h2>
+        </div>
+        <p className="text-center text-muted-foreground font-body mb-10 max-w-md mx-auto">
+          Got questions? We've got answers.
+        </p>
+
+        <Accordion type="single" collapsible className="space-y-2">
+          {[
+            {
+              q: "Which watches are compatible?",
+              a: "NeonTime works with Wear OS (Samsung Galaxy Watch, Google Pixel Watch, etc.) and watchOS (Apple Watch Series 4 and newer). We're constantly adding support for more devices.",
+            },
+            {
+              q: "How do I install the watch face?",
+              a: "After payment, you'll receive a download link via email within 24 hours. Follow the included instructions to install on your specific watch model — it takes under 2 minutes.",
+            },
+            {
+              q: "Do weather and traffic alerts update in real-time?",
+              a: "Yes! Weather data refreshes every 15 minutes and traffic alerts update based on your commute schedule. All data is pulled from trusted sources and displayed right on your wrist.",
+            },
+            {
+              q: "Can I customize colors and styles after purchase?",
+              a: "Absolutely. Your subscription includes all 4 watch face styles (Classic, Square, Band, Minimal) and all 6 neon color themes. Switch between them anytime from the companion app.",
+            },
+            {
+              q: "How does the $9.99/mo subscription work?",
+              a: "Payment is via Cash App to $fishkillerzstaking. Include your email in the payment note. Your subscription renews monthly — to cancel, simply message us on Cash App anytime.",
+            },
+            {
+              q: "What lunar and solar data is shown?",
+              a: "You get real-time moon phase (new, waxing, full, waning), moonrise/moonset times, plus daily sunrise and sunset times — all calculated for your exact GPS location.",
+            },
+            {
+              q: "Is there a free trial?",
+              a: "We don't currently offer a free trial, but you can cancel anytime after your first month with no questions asked. We're confident you'll love NeonTime.",
+            },
+          ].map(({ q, a }, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="border border-border rounded-lg px-4 overflow-hidden"
+            >
+              <AccordionTrigger className="font-display text-sm font-bold text-foreground hover:no-underline py-4">
+                {q}
+              </AccordionTrigger>
+              <AccordionContent className="text-sm font-body text-muted-foreground pb-4">
+                {a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
 
       {/* Footer */}
