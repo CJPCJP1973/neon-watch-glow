@@ -136,6 +136,22 @@ const Index = () => {
           <Button variant="neon" className="w-full" asChild>
             <a href="https://cash.app/$fishkillerzstaking" target="_blank" rel="noopener noreferrer">GET NEONTIME</a>
           </Button>
+
+          {/* Payment info */}
+          <div className="mt-5 pt-4 border-t border-border space-y-2">
+            <p className="text-[11px] font-display font-bold tracking-wider text-neon-green text-glow-green">
+              HOW IT WORKS
+            </p>
+            <ol className="space-y-1.5 text-xs font-body text-muted-foreground text-left list-decimal list-inside">
+              <li>Tap <span className="text-foreground font-semibold">"Get NeonTime"</span> to pay <span className="text-foreground font-semibold">$9.99</span> via Cash App</li>
+              <li>Send to <span className={`font-semibold ${t.primaryText}`}>$fishkillerzstaking</span></li>
+              <li>Include your <span className="text-foreground font-semibold">email</span> in the payment note</li>
+              <li>Receive your watch face download link within <span className="text-foreground font-semibold">24 hours</span></li>
+            </ol>
+            <p className="text-[10px] text-muted-foreground font-body pt-1">
+              Questions? Message us on Cash App. Subscription renews monthly — cancel anytime by messaging us.
+            </p>
+          </div>
         </div>
       </section>
 
