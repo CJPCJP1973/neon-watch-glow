@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity, Lightbulb, MoonStar, Sun } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -23,6 +23,7 @@ const features = [
   { icon: Heart, title: "HEART RATE", description: "Continuous heart rate monitoring with resting BPM, zones & alerts for abnormal readings.", color: "magenta" as const },
   { icon: BedDouble, title: "SLEEP TRACKING", description: "Monitor sleep stages, duration & quality. Wake up smarter with personalized sleep scores.", color: "cyan" as const },
   { icon: Activity, title: "BLOOD OXYGEN (SpO2)", description: "Real-time SpO2 monitoring with altitude adjustments & low-oxygen alerts for your safety.", color: "green" as const },
+  { icon: Lightbulb, title: "GLOW IN THE DARK", description: "Auto-luminous neon hands & markers charge in daylight and glow brilliantly in the dark for instant nighttime readability.", color: "yellow" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
@@ -46,6 +47,7 @@ const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
   const [activeShape, setActiveShape] = useState<WatchShape>("round");
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [glowMode, setGlowMode] = useState(false);
   const t = themeMap[activeTheme];
 
   const touchStartX = useRef(0);
@@ -79,7 +81,15 @@ const Index = () => {
   }, [activeShape, handleShapeChange]);
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <div className={`min-h-screen overflow-hidden transition-colors duration-700 ${glowMode ? "bg-black glow-mode" : "bg-background"}`}>
+      <style>{`
+        .glow-mode .text-glow-cyan,
+        .glow-mode .text-glow-magenta,
+        .glow-mode .text-glow-green,
+        .glow-mode .text-glow-orange {
+          text-shadow: 0 0 8px currentColor, 0 0 18px currentColor, 0 0 36px currentColor !important;
+        }
+      `}</style>
       {/* Hero */}
       <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-20">
         {/* Background grid */}
@@ -141,6 +151,23 @@ const Index = () => {
           <div className="mb-8">
             <ThemePicker activeTheme={activeTheme} onThemeChange={setActiveTheme} />
           </div>
+
+          {/* Glow in the dark toggle */}
+          <button
+            onClick={() => setGlowMode(!glowMode)}
+            className={`mb-6 flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+              glowMode
+                ? `${t.primaryBorder} ${t.primaryText} ${t.primaryGlow}`
+                : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+            style={glowMode ? { boxShadow: `0 0 20px hsl(${t.hsl} / 0.5)` } : undefined}
+            aria-pressed={glowMode}
+          >
+            {glowMode ? <MoonStar className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            <span className="font-display text-[11px] font-bold tracking-[0.2em]">
+              {glowMode ? "GLOW MODE ON" : "GLOW IN THE DARK"}
+            </span>
+          </button>
 
           {/* CTA */}
           <Button variant="neon" size="lg" className="mb-3" asChild>
