@@ -88,8 +88,10 @@ const Index = () => {
           </div>
 
           {/* CTA */}
-          <Button variant="neon" size="lg" className="mb-3">
-            SUBSCRIBE — $9.99/mo
+          <Button variant="neon" size="lg" className="mb-3" asChild>
+            <a href="https://cash.app/$fishkillerzstaking" target="_blank" rel="noopener noreferrer">
+              SUBSCRIBE — $9.99/mo
+            </a>
           </Button>
           <p className="text-xs text-muted-foreground font-body">
             Compatible with Wear OS & watchOS • Cancel anytime
@@ -131,7 +133,9 @@ const Index = () => {
               </li>
             ))}
           </ul>
-          <Button variant="neon" className="w-full">GET NEONTIME</Button>
+          <Button variant="neon" className="w-full" asChild>
+            <a href="https://cash.app/$fishkillerzstaking" target="_blank" rel="noopener noreferrer">GET NEONTIME</a>
+          </Button>
         </div>
       </section>
 
