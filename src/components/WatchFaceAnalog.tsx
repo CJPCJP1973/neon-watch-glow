@@ -17,6 +17,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
   const hours = time.getHours() % 12;
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
+  const dateNum = time.getDate();
 
   const hourAngle = (hours + minutes / 60) * 30;
   const minuteAngle = (minutes + seconds / 60) * 6;
@@ -73,23 +74,53 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
 
         {/* Hour numbers (neon) */}
         {numbers.map(({ num, x, y }) => (
+          num === 3 ? null : (
+            <text
+              key={num}
+              x={x}
+              y={y}
+              textAnchor="middle"
+              dominantBaseline="central"
+              fontFamily="Orbitron, sans-serif"
+              fontWeight="900"
+              fontSize="22"
+              fill={`hsl(${t.hsl})`}
+              style={{
+                filter: `drop-shadow(0 0 6px hsl(${t.hsl} / 0.9)) drop-shadow(0 0 12px hsl(${t.hsl} / 0.5))`,
+              }}
+            >
+              {num}
+            </text>
+          )
+        ))}
+
+        {/* Date complication window at 3 o'clock */}
+        <g>
+          <rect
+            x="245"
+            y="148"
+            width="34"
+            height="24"
+            rx="3"
+            fill="black"
+            stroke={`hsl(${t.hsl})`}
+            strokeWidth="1.5"
+            style={{ filter: `drop-shadow(0 0 4px hsl(${t.hsl} / 0.7))` }}
+          />
           <text
-            key={num}
-            x={x}
-            y={y}
+            x="262"
+            y="160"
             textAnchor="middle"
             dominantBaseline="central"
             fontFamily="Orbitron, sans-serif"
             fontWeight="900"
-            fontSize="22"
-            fill={`hsl(${t.hsl})`}
-            style={{
-              filter: `drop-shadow(0 0 6px hsl(${t.hsl} / 0.9)) drop-shadow(0 0 12px hsl(${t.hsl} / 0.5))`,
-            }}
+            fontSize="14"
+            fill="white"
+            style={{ filter: "drop-shadow(0 0 2px rgba(255,255,255,0.8))" }}
           >
-            {num}
+            {dateNum}
           </text>
-        ))}
+        </g>
 
         {/* Hour hand (white) */}
         <line
