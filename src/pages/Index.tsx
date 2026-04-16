@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity, Lightbulb, MoonStar, Sun } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -23,6 +23,7 @@ const features = [
   { icon: Heart, title: "HEART RATE", description: "Continuous heart rate monitoring with resting BPM, zones & alerts for abnormal readings.", color: "magenta" as const },
   { icon: BedDouble, title: "SLEEP TRACKING", description: "Monitor sleep stages, duration & quality. Wake up smarter with personalized sleep scores.", color: "cyan" as const },
   { icon: Activity, title: "BLOOD OXYGEN (SpO2)", description: "Real-time SpO2 monitoring with altitude adjustments & low-oxygen alerts for your safety.", color: "green" as const },
+  { icon: Lightbulb, title: "GLOW IN THE DARK", description: "Auto-luminous neon hands & markers charge in daylight and glow brilliantly in the dark for instant nighttime readability.", color: "yellow" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
