@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -37,20 +37,43 @@ const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonThem
   }
 };
 
+const shapes: WatchShape[] = ["round", "square", "rect", "minimal"];
+
 const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
   const [activeShape, setActiveShape] = useState<WatchShape>("round");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const t = themeMap[activeTheme];
 
-  const handleShapeChange = (shape: WatchShape) => {
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  const handleShapeChange = useCallback((shape: WatchShape) => {
     if (shape === activeShape) return;
     setIsTransitioning(true);
     setTimeout(() => {
       setActiveShape(shape);
       setIsTransitioning(false);
     }, 200);
-  };
+  }, [activeShape]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+
+    const currentIndex = shapes.indexOf(activeShape);
+    if (dx < 0 && currentIndex < shapes.length - 1) {
+      handleShapeChange(shapes[currentIndex + 1]);
+    } else if (dx > 0 && currentIndex > 0) {
+      handleShapeChange(shapes[currentIndex - 1]);
+    }
+  }, [activeShape, handleShapeChange]);
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -90,7 +113,11 @@ const Index = () => {
           </p>
 
           {/* Watch Face */}
-          <div className="mb-6 flex items-center justify-center min-h-[340px]">
+          <div
+            className="mb-6 flex items-center justify-center min-h-[340px] touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               className={`transition-all duration-200 ease-out ${
                 isTransitioning
