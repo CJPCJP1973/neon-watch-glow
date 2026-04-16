@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -18,6 +18,8 @@ const features = [
   { icon: Sunrise, title: "SUN TIMES", description: "Sunrise & sunset times updated daily for your exact location.", color: "magenta" as const },
   { icon: Compass, title: "COMPASS", description: "Digital compass with bearing display. Always know your heading, even off-grid.", color: "cyan" as const },
   { icon: Timer, title: "CHRONOGRAPH", description: "Precision stopwatch with lap times. Track your runs, swims & workouts to the millisecond.", color: "green" as const },
+  { icon: Footprints, title: "STEP COUNTER", description: "Track daily steps, distance walked & calories burned. Hit your goals right from your wrist.", color: "orange" as const },
+  { icon: Heart, title: "HEART RATE", description: "Continuous heart rate monitoring with resting BPM, zones & alerts for abnormal readings.", color: "magenta" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
