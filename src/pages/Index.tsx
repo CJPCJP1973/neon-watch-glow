@@ -2,8 +2,12 @@ import { useState } from "react";
 import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
+import WatchFaceSquare from "@/components/WatchFaceSquare";
+import WatchFaceRect from "@/components/WatchFaceRect";
+import WatchFaceMinimal from "@/components/WatchFaceMinimal";
 import FeatureCard from "@/components/FeatureCard";
 import ThemePicker from "@/components/ThemePicker";
+import ShapePicker, { type WatchShape } from "@/components/ShapePicker";
 import { NeonTheme, themeMap } from "@/lib/themes";
 
 const features = [
@@ -13,8 +17,22 @@ const features = [
   { icon: Sunrise, title: "SUN TIMES", description: "Sunrise & sunset times updated daily for your exact location.", color: "magenta" as const },
 ];
 
+const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
+  switch (shape) {
+    case "square":
+      return <WatchFaceSquare theme={theme} />;
+    case "rect":
+      return <WatchFaceRect theme={theme} />;
+    case "minimal":
+      return <WatchFaceMinimal theme={theme} />;
+    default:
+      return <WatchFace theme={theme} />;
+  }
+};
+
 const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
+  const [activeShape, setActiveShape] = useState<WatchShape>("round");
   const t = themeMap[activeTheme];
 
   return (
@@ -55,8 +73,13 @@ const Index = () => {
           </p>
 
           {/* Watch Face */}
-          <div className="mb-6">
-            <WatchFace theme={activeTheme} />
+          <div className="mb-6 flex items-center justify-center min-h-[340px]">
+            <WatchFaceVariant shape={activeShape} theme={activeTheme} />
+          </div>
+
+          {/* Shape Picker */}
+          <div className="mb-4">
+            <ShapePicker activeShape={activeShape} onShapeChange={setActiveShape} theme={activeTheme} />
           </div>
 
           {/* Theme Picker */}
@@ -101,7 +124,7 @@ const Index = () => {
             <span className="text-muted-foreground font-body text-sm">/mo</span>
           </div>
           <ul className="space-y-2 mb-6 text-sm font-body text-muted-foreground">
-            {["All watch face modules", "Real-time weather & traffic", "Lunar & solar tracking", "Unlimited customization", "Priority support"].map((item) => (
+            {["All 4 watch face styles", "Real-time weather & traffic", "Lunar & solar tracking", "6 neon color themes", "Priority support"].map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <AlertTriangle className={`w-3 h-3 ${t.primaryText} transition-colors duration-500`} />
                 {item}
