@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -16,6 +16,8 @@ const features = [
   { icon: Navigation, title: "TRAFFIC ALERTS", description: "Live commute times and route alerts. Never get stuck in traffic again.", color: "green" as const },
   { icon: Moon, title: "LUNAR TRACKER", description: "Moon phase, moonrise & moonset times. Perfect for outdoor enthusiasts.", color: "orange" as const },
   { icon: Sunrise, title: "SUN TIMES", description: "Sunrise & sunset times updated daily for your exact location.", color: "magenta" as const },
+  { icon: Compass, title: "COMPASS", description: "Digital compass with bearing display. Always know your heading, even off-grid.", color: "cyan" as const },
+  { icon: Timer, title: "CHRONOGRAPH", description: "Precision stopwatch with lap times. Track your runs, swims & workouts to the millisecond.", color: "green" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
@@ -106,7 +108,7 @@ const Index = () => {
           EVERYTHING ON YOUR <span className="text-neon-magenta text-glow-magenta">WRIST</span>
         </h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-md mx-auto">
-          Six data modules. One glance. Zero distractions.
+          Eight data modules. One glance. Zero distractions.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
