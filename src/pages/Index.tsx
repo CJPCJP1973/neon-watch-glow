@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer } from "lucide-react";
+import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import WatchFace from "@/components/WatchFace";
@@ -18,6 +18,8 @@ const features = [
   { icon: Sunrise, title: "SUN TIMES", description: "Sunrise & sunset times updated daily for your exact location.", color: "magenta" as const },
   { icon: Compass, title: "COMPASS", description: "Digital compass with bearing display. Always know your heading, even off-grid.", color: "cyan" as const },
   { icon: Timer, title: "CHRONOGRAPH", description: "Precision stopwatch with lap times. Track your runs, swims & workouts to the millisecond.", color: "green" as const },
+  { icon: Footprints, title: "STEP COUNTER", description: "Track daily steps, distance walked & calories burned. Hit your goals right from your wrist.", color: "orange" as const },
+  { icon: Heart, title: "HEART RATE", description: "Continuous heart rate monitoring with resting BPM, zones & alerts for abnormal readings.", color: "magenta" as const },
 ];
 
 const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonTheme }) => {
@@ -108,7 +110,7 @@ const Index = () => {
           EVERYTHING ON YOUR <span className="text-neon-magenta text-glow-magenta">WRIST</span>
         </h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-md mx-auto">
-          Eight data modules. One glance. Zero distractions.
+          Ten data modules. One glance. Zero distractions.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -159,7 +161,7 @@ const Index = () => {
             <span className="text-muted-foreground font-body text-sm">/mo</span>
           </div>
           <ul className="space-y-2 mb-6 text-sm font-body text-muted-foreground">
-            {["All 4 watch face styles", "Real-time weather & traffic", "Lunar & solar tracking", "Compass & chronograph", "6 neon color themes", "Priority support"].map((item) => (
+            {["All 4 watch face styles", "Real-time weather & traffic", "Lunar & solar tracking", "Compass & chronograph", "Step counter & heart rate", "6 neon color themes", "Priority support"].map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <AlertTriangle className={`w-3 h-3 ${t.primaryText} transition-colors duration-500`} />
                 {item}
