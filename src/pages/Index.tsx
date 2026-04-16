@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,17 @@ const WatchFaceVariant = ({ shape, theme }: { shape: WatchShape; theme: NeonThem
 const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
   const [activeShape, setActiveShape] = useState<WatchShape>("round");
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const t = themeMap[activeTheme];
+
+  const handleShapeChange = (shape: WatchShape) => {
+    if (shape === activeShape) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveShape(shape);
+      setIsTransitioning(false);
+    }, 200);
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -79,12 +89,20 @@ const Index = () => {
 
           {/* Watch Face */}
           <div className="mb-6 flex items-center justify-center min-h-[340px]">
-            <WatchFaceVariant shape={activeShape} theme={activeTheme} />
+            <div
+              className={`transition-all duration-200 ease-out ${
+                isTransitioning
+                  ? "opacity-0 scale-95 blur-sm"
+                  : "opacity-100 scale-100 blur-0"
+              }`}
+            >
+              <WatchFaceVariant shape={activeShape} theme={activeTheme} />
+            </div>
           </div>
 
           {/* Shape Picker */}
           <div className="mb-4">
-            <ShapePicker activeShape={activeShape} onShapeChange={setActiveShape} theme={activeTheme} />
+            <ShapePicker activeShape={activeShape} onShapeChange={handleShapeChange} theme={activeTheme} />
           </div>
 
           {/* Theme Picker */}
