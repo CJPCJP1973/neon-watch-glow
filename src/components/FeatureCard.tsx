@@ -4,7 +4,7 @@ interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  color: "cyan" | "magenta" | "green" | "orange";
+  color: "cyan" | "magenta" | "green" | "orange" | "yellow";
 }
 
 const colorMap = {
@@ -12,6 +12,7 @@ const colorMap = {
   magenta: "text-neon-magenta text-glow-magenta border-neon-magenta/30",
   green: "text-neon-green text-glow-green border-neon-green/30",
   orange: "text-neon-orange text-glow-orange border-neon-orange/30",
+  yellow: "text-neon-yellow text-glow-orange border-neon-yellow/30",
 };
 
 const FeatureCard = ({ icon: Icon, title, description, color }: FeatureCardProps) => (

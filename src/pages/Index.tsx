@@ -47,6 +47,7 @@ const Index = () => {
   const [activeTheme, setActiveTheme] = useState<NeonTheme>("cyan");
   const [activeShape, setActiveShape] = useState<WatchShape>("round");
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [glowMode, setGlowMode] = useState(false);
   const t = themeMap[activeTheme];
 
   const touchStartX = useRef(0);
