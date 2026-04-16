@@ -12,8 +12,20 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      display: ['Orbitron', 'sans-serif'],
+      body: ['Rajdhani', 'sans-serif'],
+    },
     extend: {
       colors: {
+        neon: {
+          cyan: "hsl(var(--neon-cyan))",
+          magenta: "hsl(var(--neon-magenta))",
+          green: "hsl(var(--neon-green))",
+          orange: "hsl(var(--neon-orange))",
+          blue: "hsl(var(--neon-blue))",
+          yellow: "hsl(var(--neon-yellow))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
