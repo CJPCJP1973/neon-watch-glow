@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Cloud, Navigation, Moon, Sunrise, AlertTriangle, Zap, HelpCircle, Compass, Timer, Heart, Footprints, BedDouble, Activity, Lightbulb, MoonStar, Sun } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -49,6 +49,23 @@ const Index = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [glowMode, setGlowMode] = useState(false);
   const t = themeMap[activeTheme];
+
+  // Auto-enable glow mode based on system dark mode + time of day (7pm–6am)
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const evaluate = () => {
+      const hour = new Date().getHours();
+      const isNightHour = hour >= 19 || hour < 6;
+      setGlowMode(mql.matches && isNightHour);
+    };
+    evaluate();
+    mql.addEventListener("change", evaluate);
+    const interval = setInterval(evaluate, 60_000);
+    return () => {
+      mql.removeEventListener("change", evaluate);
+      clearInterval(interval);
+    };
+  }, []);
 
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
