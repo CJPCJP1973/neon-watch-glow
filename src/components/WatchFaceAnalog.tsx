@@ -192,7 +192,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
                 dominantBaseline="central"
                 fontFamily="Orbitron, sans-serif"
                 fontWeight="900"
-                fontSize="22"
+                fontSize="16"
                 fill={`hsl(${t.hsl})`}
                 style={{
                   filter: `drop-shadow(0 0 6px hsl(${t.hsl} / 0.9)) drop-shadow(0 0 12px hsl(${t.hsl} / 0.5))`,
