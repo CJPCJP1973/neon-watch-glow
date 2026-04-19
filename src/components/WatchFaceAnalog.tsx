@@ -65,20 +65,20 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
   const chronoSecondAngle = chronoSeconds * 6;
   const chronoMinuteAngle = (chronoMinutesTotal % 30) * 12;
 
-  // 12 hour numbers around the dial
+  // 12 hour numbers around the dial (pulled in to make room for tachymeter)
   const numbers = Array.from({ length: 12 }, (_, i) => {
     const num = i === 0 ? 12 : i;
     const angle = (i * 30 - 90) * (Math.PI / 180);
-    const radius = 125;
+    const radius = 95;
     const x = 160 + radius * Math.cos(angle);
     const y = 160 + radius * Math.sin(angle);
     return { num, x, y };
   });
 
   // Sub-dial center (9 o'clock position)
-  const subCx = 95;
+  const subCx = 110;
   const subCy = 160;
-  const subR = 28;
+  const subR = 22;
 
   return (
     <div className="flex flex-col items-center gap-4">
