@@ -65,20 +65,20 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
   const chronoSecondAngle = chronoSeconds * 6;
   const chronoMinuteAngle = (chronoMinutesTotal % 30) * 12;
 
-  // 12 hour numbers around the dial
+  // 12 hour numbers around the dial (pulled in to make room for tachymeter)
   const numbers = Array.from({ length: 12 }, (_, i) => {
     const num = i === 0 ? 12 : i;
     const angle = (i * 30 - 90) * (Math.PI / 180);
-    const radius = 125;
+    const radius = 95;
     const x = 160 + radius * Math.cos(angle);
     const y = 160 + radius * Math.sin(angle);
     return { num, x, y };
   });
 
   // Sub-dial center (9 o'clock position)
-  const subCx = 95;
+  const subCx = 110;
   const subCy = 160;
-  const subR = 28;
+  const subR = 22;
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -94,18 +94,79 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
           />
         </div>
 
-        {/* Inner bezel */}
+        {/* Inner bezel (tachymeter ring boundary) */}
         <div className={`absolute inset-2 rounded-full border ${t.primaryBorder} opacity-20 transition-colors duration-500`} />
+        <div className={`absolute inset-[26px] rounded-full border ${t.primaryBorder} opacity-30 transition-colors duration-500`} />
 
         <svg viewBox="0 0 320 320" className="relative z-10 w-full h-full">
+          {/* Tachymeter markings (outer ring) */}
+          {[60, 70, 75, 80, 90, 100, 120, 150, 180, 200, 240, 300, 400, 500].map((val) => {
+            // Angle: where the second hand points after `val` seconds (val sec = 3600/val units/hr)
+            // Only place values where seconds <= 60 (i.e., val >= 60)
+            const sec = 3600 / val;
+            if (sec > 60) return null;
+            const angleDeg = sec * 6 - 90;
+            const angle = angleDeg * (Math.PI / 180);
+            const tickInner = 134;
+            const tickOuter = 142;
+            const labelR = 124;
+            const x1 = 160 + tickInner * Math.cos(angle);
+            const y1 = 160 + tickInner * Math.sin(angle);
+            const x2 = 160 + tickOuter * Math.cos(angle);
+            const y2 = 160 + tickOuter * Math.sin(angle);
+            const lx = 160 + labelR * Math.cos(angle);
+            const ly = 160 + labelR * Math.sin(angle);
+            return (
+              <g key={val}>
+                <line
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke={`hsl(${t.hsl})`}
+                  strokeOpacity="0.7"
+                  strokeWidth="1"
+                />
+                <text
+                  x={lx}
+                  y={ly}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontFamily="Orbitron, sans-serif"
+                  fontWeight="700"
+                  fontSize="7"
+                  fill={`hsl(${t.hsl})`}
+                  opacity="0.85"
+                  style={{ filter: `drop-shadow(0 0 2px hsl(${t.hsl} / 0.6))` }}
+                >
+                  {val}
+                </text>
+              </g>
+            );
+          })}
+          {/* TACHYMETER label */}
+          <text
+            x="160"
+            y="138"
+            textAnchor="middle"
+            fontFamily="Orbitron, sans-serif"
+            fontWeight="700"
+            fontSize="5"
+            fill={`hsl(${t.hsl})`}
+            opacity="0.6"
+            letterSpacing="2"
+          >
+            TACHYMETER
+          </text>
+
           {/* Minute ticks */}
           {Array.from({ length: 60 }).map((_, i) => {
             if (i % 5 === 0) return null;
             const angle = (i * 6 - 90) * (Math.PI / 180);
-            const x1 = 160 + 145 * Math.cos(angle);
-            const y1 = 160 + 145 * Math.sin(angle);
-            const x2 = 160 + 152 * Math.cos(angle);
-            const y2 = 160 + 152 * Math.sin(angle);
+            const x1 = 160 + 110 * Math.cos(angle);
+            const y1 = 160 + 110 * Math.sin(angle);
+            const x2 = 160 + 116 * Math.cos(angle);
+            const y2 = 160 + 116 * Math.sin(angle);
             return (
               <line
                 key={i}
@@ -131,7 +192,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
                 dominantBaseline="central"
                 fontFamily="Orbitron, sans-serif"
                 fontWeight="900"
-                fontSize="22"
+                fontSize="16"
                 fill={`hsl(${t.hsl})`}
                 style={{
                   filter: `drop-shadow(0 0 6px hsl(${t.hsl} / 0.9)) drop-shadow(0 0 12px hsl(${t.hsl} / 0.5))`,
@@ -145,10 +206,10 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
           {/* Date complication window at 3 o'clock */}
           <g>
             <rect
-              x="245"
-              y="148"
-              width="34"
-              height="24"
+              x="195"
+              y="150"
+              width="28"
+              height="20"
               rx="3"
               fill="black"
               stroke={`hsl(${t.hsl})`}
@@ -156,13 +217,13 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
               style={{ filter: `drop-shadow(0 0 4px hsl(${t.hsl} / 0.7))` }}
             />
             <text
-              x="262"
+              x="209"
               y="160"
               textAnchor="middle"
               dominantBaseline="central"
               fontFamily="Orbitron, sans-serif"
               fontWeight="900"
-              fontSize="14"
+              fontSize="12"
               fill="white"
               style={{ filter: "drop-shadow(0 0 2px rgba(255,255,255,0.8))" }}
             >
@@ -233,7 +294,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
             x1="160"
             y1="160"
             x2="160"
-            y2="90"
+            y2="105"
             stroke="white"
             strokeWidth="6"
             strokeLinecap="round"
@@ -246,7 +307,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
             x1="160"
             y1="160"
             x2="160"
-            y2="55"
+            y2="78"
             stroke={`hsl(${t.hsl})`}
             strokeWidth="4"
             strokeLinecap="round"
@@ -259,7 +320,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
             x1="160"
             y1="175"
             x2="160"
-            y2="45"
+            y2="68"
             stroke="white"
             strokeWidth="2"
             strokeLinecap="round"
@@ -273,7 +334,7 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
               x1="160"
               y1="180"
               x2="160"
-              y2="40"
+              y2="62"
               stroke={`hsl(${t.hsl})`}
               strokeWidth="1.5"
               strokeLinecap="round"
