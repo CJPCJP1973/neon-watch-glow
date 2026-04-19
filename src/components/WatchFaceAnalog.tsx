@@ -206,10 +206,10 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
           {/* Date complication window at 3 o'clock */}
           <g>
             <rect
-              x="245"
-              y="148"
-              width="34"
-              height="24"
+              x="195"
+              y="150"
+              width="28"
+              height="20"
               rx="3"
               fill="black"
               stroke={`hsl(${t.hsl})`}
@@ -217,13 +217,13 @@ const WatchFaceAnalog = ({ theme = "cyan" }: WatchFaceAnalogProps) => {
               style={{ filter: `drop-shadow(0 0 4px hsl(${t.hsl} / 0.7))` }}
             />
             <text
-              x="262"
+              x="209"
               y="160"
               textAnchor="middle"
               dominantBaseline="central"
               fontFamily="Orbitron, sans-serif"
               fontWeight="900"
-              fontSize="14"
+              fontSize="12"
               fill="white"
               style={{ filter: "drop-shadow(0 0 2px rgba(255,255,255,0.8))" }}
             >
