@@ -1,6 +1,6 @@
-# Welcome to your Lovable project
+# Welcome to Neon Time
 
-watch face app featuring neon watch faces in chronograph & classic digital faces
+digital watch face app featuring neon watch faces in chronograph & classic digital faces
 Featuring:
 - health monitors
 - weather alert
